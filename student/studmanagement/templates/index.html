@@ -22,7 +22,8 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{% static 'css/material-dashboard.css' %}" rel="stylesheet" />
 </head>
-
+<style>
+</style>
 <body class="bg-gray-200">
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
@@ -70,23 +71,26 @@
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" class="text-start">
-				  
+                <form role="form" method="post" action="/sign_in/" class="text-start">
+                  {% csrf_token %}
+                  <h5>{{msg}}</h5>
                   <div class="input-group input-group-outline my-3">
-                    <label class="form-label">username</label>
-                    <input type="text" class="form-control">
+                    <label class="form-label">email</label>
+                    <input type="text" name="email" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control">
+                    <input type="password" name="password" class="form-control">
                   </div>
                   
                   <div class="text-center">
-                    <a href="pg_/" type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</a>
+                    <button class="btn bg-gradient-primary w-100 my-4 mb-2" >sign in</button>
+                    <!-- <a href="/sign_in/" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</a> -->
                   </div>
                   <p class="mt-4 text-sm text-center">
                     Don't have an account?
-                    <a href="/sign-up.html" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                    <!-- <button class="text-primary text-gradient font-weight-bold">sign up</button> -->
+                  <a href="/sign-up/" class="text-primary text-gradient font-weight-bold">Sign up</a>
                   </p>
                 </form>
               </div>
