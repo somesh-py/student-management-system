@@ -57,7 +57,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="/courses.html">
+          <a class="nav-link text-white " href="/courses/">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">view_in_ar</i>
             </div>
@@ -82,7 +82,7 @@
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
       <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-4 w-100" href="" type="button">Logout</a>
+        <a class="btn bg-gradient-primary mt-4 w-100" href="/" type="button">Logout</a>
       </div>
     </div>
   </aside>
@@ -135,7 +135,7 @@
               </div>
               <div class="text-end pt-1">
                 <a class="btn bg-gradient-dark mb-0" href="javascript:;" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"><i class="material-icons text-sm">add</i>Add New Courses</a>
+                  data-bs-target="#exampleModal"><i class="material-icons text-sm">add</i>Add New Courses</a>       
               </div>
             </div>
             </div>
@@ -144,7 +144,6 @@
         </div>
 
       </div>
-
       <div class="row mt-4 mb-4">
         <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
           <div class="card">
@@ -168,9 +167,15 @@
                         Comment</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Registered Date</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          Edit</th>
+                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          Delete</th>
                     </tr>
                   </thead>
                   <tbody>
+                    {% if data %}
+                    {% for i in data %}
                     <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
@@ -179,44 +184,32 @@
                           </div>
                           <div class="d-flex flex-column justify-content-center">
                             <a href="Courses_details.html" type="button"
-                              class="btn btn-outline-primary btn-sm mb-0">Python</a>
+                              class="btn btn-outline-primary btn-sm mb-0">{{i.course}}</a>
                           </div>
                         </div>
                       </td>
                       <td class="align-middle text-sm">
-                        <span class="text-xs font-weight-bold">35k</span>
+                        <span class="text-xs font-weight-bold">{{i.fees}}</span>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">It is 3 months course</span>
+                        <span class="text-xs font-weight-bold">{{i.comment}}</span>
                       </td>
                       <td class="text-center text-sm">
-                        <span class="text-xs font-weight-bold"> 12 NOV 7:20 PM </span>
+                        <span class="text-xs font-weight-bold">{{i.date}}</span>
                       </td>
-                    </tr>
-
-                    <tr>
                       <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="{% static '/img/small-logos/logo-asana.svg' %}" class="avatar avatar-sm me-3" alt="xd">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <a href="Courses_details.html" type="button"
-                              class="btn btn-outline-primary btn-sm mb-0">React</a>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle text-sm">
-                        <span class="text-xs font-weight-bold">35k</span>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">It is 6 months course</span>
-                      </td>
-                      <td class="text-center text-sm">
-                        <span class="text-xs font-weight-bold"> 12 NOV 7:20 PM </span>
-                      </td>
+                      {% comment %} <a class="btn bg-gradient-dark mb-0" href="updatecourse/{{i.id}}" data-bs-toggle="modal"
+                      data-bs-target="#updatecourse"><i class="material-icons text-sm"></i>edit</a>
+                      </td> {% endcomment %}
+                      <td><a href="/updateform/{{i.id}}/" id="edit" class="btn btn-primary">Edit</a>
+                        <a href="{% url 'delete' i.pk %}" type="submit" id="edit" class="btn btn-danger shadow btn-xs sharp me-1"
+                        data-bs-target="#delete" ... onclick="return confirm('Are you sure you want to delete this?') ">delete
+                                                                                    <i class="fa fa-trash"></i>
+                                                                                   </a>
+                    </td>
                     </tr>
-
+                    {% endfor %}
+                    {% endif %}
                   </tbody>
                 </table>
               </div>
@@ -225,164 +218,53 @@
         </div>
       </div>
 
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="card-body">
-          <form role="form">
-            <div class="row">
-              <div class="col-lg-6 col-md-6">
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Name</label>
-                  <input type="text" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)">
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6">
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Email</label>
-                  <input type="email" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)">
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6">
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Mobile No.</label>
-                  <input type="text" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)">
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">College</label>
-                  <input type="text" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)">
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Degree</label>
-                  <input type="text" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)">
-                </div>
-              </div>
-
-
-              <div class="col-lg-6 col-md-6">
-                <div class="input-group input-group-outline mb-3">
-                  <select class="form-select form-control" placeholder="courses" onfocus="focused(this)"
-                    onfocusout="defocused(this)" aria-label="Default select example">
-                    <option class="fw-lighter" selected>Courses</option>
-                    <option value="Python">Python</option>
-                    <option value="Node js">Node js</option>
-                    <option value=Java">Java</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <div class="input-group input-group-outline mb-3">
-                  <select class="form-select form-control" onfocus="focused(this)" onfocusout="defocused(this)"
-                    aria-label="Default select example">
-                    <option selected>Fees</option>
-                    <option value="13k">13k</option>
-                    <option value="15k">15k</option>
-                    <option value=30k">30k</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6">
-                <div class="input-group input-group-outline mb-3">
-                  <select class="form-select form-control" onfocus="focused(this)" onfocusout="defocused(this)"
-                    aria-label="Default select example">
-                    <option selected>Duration</option>
-                    <option value="3 Months">3 Months</option>
-                    <option value="6 Months">6 Months</option>
-                    <option value="9 Months">9 Months</option>
-                    <option value="12 Months">12 Months</option>
-
-                  </select>
-                </div>
-              </div>
-
-              <!-- <div class="mb-3">
-                <label for="formFile" class="form-label">Default file input example</label>
-                
-              </div> -->
-              
-              <div class="input-group input-group-outline mb-3">
-                <textarea class="form-control col-lg-12 col-md-6" placeholder="Leave a comment here"
-                id="floatingTextarea"></textarea>
-              </div>
-              
-              
-              <div class="col-lg-12 col-md-12 my-2">
-                <div class="d-flex align-items-center justify-content-lg-between">
-                  <label for="myfile">Upload Image : </label>
-                  <input type="file" id="myfile" name="myfile">
-                </div>
-              </div>
-
-              <div class="text-center">
-                <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-2 mb-0"
-                  data-bs-dismiss="modal">Submit</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-      <!-- Modal for adding courses -->
-      <div class="modal fade" id="exampleModl" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Add Courses</h5>
+              <h5 class="modal-title" id="exampleModalLabel">ADD COURSES</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
               <div class="card-body">
-                <form role="form">
+                <form role="form" method="post" action="/addcourse/">
+                  {% csrf_token %}
                   <div class="row">
                     <div class="col-lg-6 col-md-6">
                       <div class="input-group input-group-outline mb-3">
-                        <label class="form-label">Course</label>
-                        <input type="text" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)">
+                        <label class="form-label">course name</label>
+                        <input type="text" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" name="course" >
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                      <div class="input-group input-group-outline mb-3">
+                        <label class="form-label">fees</label>
+                        <input type="fees" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" name="fees" >
                       </div>
                     </div>
 
                     <div class="col-lg-6 col-md-6">
                       <div class="input-group input-group-outline mb-3">
-                        <select class="form-select form-control" onfocus="focused(this)" onfocusout="defocused(this)"
-                          aria-label="Default select example">
-                          <option selected>Fees</option>
-                          <option value="13k">13k</option>
-                          <option value="15k">15k</option>
-                          <option value=30k">30k</option>
-                        </select>
+                        <label class="form-label">comment</label>
+                        <input type="text" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" name="comment" >
                       </div>
                     </div>
 
-                    <div class="input-group input-group-outline mb-3">
-                      <textarea class="form-control col-lg-12 col-md-6" placeholder="Leave a comment here"
-                        id="floatingTextarea"></textarea>
+                    <div class="col-lg-6 col-md-6">
+                      <div class="input-group input-group-outline mb-3">
+                        {% comment %} <label class="form-label">registered date</label> {% endcomment %}
+                        <input type="date" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" name="date">
+                      </div>
                     </div>
 
-
+                    <!-- <div class="mb-3">
+                      <label for="formFile" class="form-label">Default file input example</label>
+                      
+                    </div> -->                  
+                    
                     <div class="text-center">
-                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-2 mb-0"
+                      <button type="Submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-2 mb-0"
                         data-bs-dismiss="modal">Submit</button>
                     </div>
                   </div>
@@ -395,7 +277,69 @@
           </div>
         </div>
       </div>
+{% comment %} end model copy {% endcomment %}
 
+{% comment %} start update courses {% endcomment %}
+      <!-- Modal -->
+      {% comment %} <div class="modal fade" id="updatecourse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">UPDATE COURSE</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="card-body">
+                <form role="form" method="post" action="/updatecoursedata/">
+                  {% csrf_token %}
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                      <div class="input-group input-group-outline mb-3">
+                        <label class="form-label">course name</label>
+                        <input type="text" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" name="ucourse" >
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                      <div class="input-group input-group-outline mb-3">
+                        <label class="form-label">fees</label>
+                        <input type="fees" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" name="ufees" >
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                      <div class="input-group input-group-outline mb-3">
+                        <label class="form-label">comment</label>
+                        <input type="text" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" name="ucomment" >
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                      <div class="input-group input-group-outline mb-3">
+                          <label class="form-label">registered date</label>
+                      <input type="date" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" name="udate">
+                      </div>
+                    </div>
+                    <input type="hidden" value="{{i.id}}" name="uid" /> {% endcomment %}
+                    <!-- <div class="mb-3">
+                      <label for="formFile" class="form-label">Default file input example</label>
+                      
+                    </div> -->                  
+{% comment %}                     
+                    <div class="text-center">
+                      <button type="Submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-2 mb-0"
+                        data-bs-dismiss="modal">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div> {% endcomment %}
+{% comment %} end update copy {% endcomment %}
       <footer class="footer py-4  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
@@ -416,74 +360,27 @@
       </footer>
     </div>
   </main>
-  <div class="fixed-plugin">
-    <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-      <i class="material-icons py-2">settings</i>
-    </a>
-    <div class="card shadow-lg">
-      <div class="card-header pb-0 pt-3">
-        <div class="float-start">
-          <h5 class="mt-3 mb-0">UI Configurator</h5>
-          <p>See our dashboard options.</p>
-        </div>
-        <div class="float-end mt-4">
-          <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-            <i class="material-icons">clear</i>
-          </button>
-        </div>
-        <!-- End Toggle Button -->
-      </div>
-      <hr class="horizontal dark my-1">
-      <div class="card-body pt-sm-3 pt-0">
-        <!-- Sidebar Backgrounds -->
-        <div>
-          <h6 class="mb-0">Sidebar Colors</h6>
-        </div>
-        <a href="javascript:void(0)" class="switch-trigger background-color">
-          <div class="badge-colors my-2 text-start">
-            <span class="badge filter bg-gradient-primary active" data-color="primary"
-              onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
-          </div>
-        </a>
-        <!-- Sidenav Type -->
-        <div class="mt-3">
-          <h6 class="mb-0">Sidenav Type</h6>
-          <p class="text-sm">Choose between 2 different sidenav types.</p>
-        </div>
-        <div class="d-flex">
-          <button class="btn bg-gradient-dark px-3 mb-2 active" data-class="bg-gradient-dark"
-            onclick="sidebarType(this)">Dark</button>
-          <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-transparent"
-            onclick="sidebarType(this)">Transparent</button>
-          <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-white"
-            onclick="sidebarType(this)">White</button>
-        </div>
-        <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
-        <!-- Navbar Fixed -->
-        <div class="mt-3 d-flex">
-          <h6 class="mb-0">Navbar Fixed</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
-          </div>
-        </div>
-        <hr class="horizontal dark my-3">
-        <div class="mt-2 d-flex">
-          <h6 class="mb-0">Light / Dark</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
-          </div>
-        </div>
-        <hr class="horizontal dark my-sm-4">
 
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
       </div>
+
     </div>
-  </div>
-  <!--   Core JS Files   -->
+  </div>  <!--   Core JS Files   -->
   <script src="{% static '/js/core/popper.min.js' %}"></script>
   <script src="{% static '/js/core/bootstrap.min.js' %}"></script>
   <script src="{% static '/js/plugins/perfect-scrollbar.min.js' %}"></script>
