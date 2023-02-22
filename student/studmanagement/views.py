@@ -77,7 +77,10 @@ def tenants(request):
 
 
 def viewstudents(request):
-    return render(request, 'viewstudents.html')
+    data=Addcourse.objects.all()
+    studentdata=Addstudent.objects.all()
+    return render(request,'viewstudents.html',{'data':data,'studentdata':studentdata})
+    # return render(request, 'viewstudents.html')
 
 
 def addcourse(request):
@@ -109,6 +112,31 @@ def course_update(request):
         return redirect('/courses/')
 
 
-def delete(request,pk):
+def delete(request, pk):
     res = Addcourse.objects.filter(id=pk).delete()
     return redirect('/courses/')
+
+
+def addstudent(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        mobile = request.POST.get('mobile')
+        address = request.POST.get('address')
+        college = request.POST.get('college')
+        degree = request.POST.get('degree')
+        stu_addcourse_id = request.POST.get('course')
+        total_amount = request.POST.get('totalamount')
+        paid_amount = request.POST.get('paidamount')
+        due_amount = request.POST.get('dueamount')
+        stu_course = Addcourse.objects.get(id=stu_addcourse_id)
+        if Addstudent.objects.filter(semail=email).exists():
+            messages.error(request, 'email already exist')
+            return redirect('/viewstudents/')
+        elif Addstudent.objects.filter(smobile=mobile).exists():
+            messages.error(request, 'contact number is already exist')
+        else:
+            Addstudent.objects.create(sname=name, semail=email, smobile=mobile, saddress=address, scollege=college,
+                                      sdegree=degree, scourse=stu_course, total_amount=total_amount, paid_amount=paid_amount, due_amount=due_amount)
+            studentdata=Addstudent.objects.all()
+            return render(request,'viewstudents.html',{'studentdata':studentdata})

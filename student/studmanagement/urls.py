@@ -22,4 +22,5 @@ urlpatterns = [
     path('tenants/', views.tenants),
     path('viewstudents/', views.viewstudents),
     # path('updateform2/',views.updateform2),
+    path('addstudent/',views.addstudent),
 ]
