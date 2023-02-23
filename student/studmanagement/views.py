@@ -140,3 +140,4 @@ def addstudent(request):
                                       sdegree=degree, scourse=stu_course, total_amount=total_amount, paid_amount=paid_amount, due_amount=due_amount)
             studentdata=Addstudent.objects.all()
             return render(request,'viewstudents.html',{'studentdata':studentdata})
+# login required

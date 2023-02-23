@@ -10,6 +10,7 @@
   <title>
     Satkar Courses
   </title>
+  
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css"
     href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -22,19 +23,22 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="{% static 'css/material-dashboard.css' %}" rel="stylesheet" />
-
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <script>
-  var form=document.forms.myform,
-  qty=form.qty,
-  cost=form.cost,
-  output=form.Dueamount;
+  $(document).ready(function(){ //newly added 
+    $('#submit').click(function() {
 
-  window.calculate=function(){
-    var q=parseInt(qty.value, 10) || 0,
-    var c=parseFloat(cost.value) || 0;
-    output.value=(q-c).toFixed(2); 
-  };
+        var emailVal = $('#email').val(); // assuming this is a input text field
+        $.post('checkemail.php', {'email' : emailVal}, function(data) {
+            if(data.message == "exist")
+                alert("This email address already exists");
+            else
+                $('#registration').submit();
+        });
+
+        return false;
+    });
 </script>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -223,7 +227,7 @@
                       <td class="align-middle text-sm">{{i.saddress}}</td>
                       <td class="align-middle text-sm">{{i.scollege}}</td>
                       <td class="align-middle text-sm">{{i.sdegree}}</td>
-                      <td class="align-middle text-sm">null</td>
+                      <td class="align-middle text-sm">{{i.scourse.course}}</td>
                       <td class="align-middle text-sm">{{i.total_amount}}</td>
                       <td class="align-middle text-sm">{{i.paid_amount}}</td>
                       <td class="align-middle text-sm">{{i.due_amount}}</td>
@@ -248,6 +252,11 @@
               <h5 class="modal-title" id="exampleModalLabel">Add Students Details</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            {% if messages %}
+            {% for msg in messages %}
+              <h5>messages:{{msg}}</h5>
+            {% endfor %}
+            {% endif %}
             <div class="modal-body">
               <div class="card-body">
                 <form role="form" method="post" action="/addstudent/" >
@@ -325,20 +334,20 @@
                     <div class="col-lg-6 col-md-6">
                       <div class="input-group input-group-outline mb-3">
                         <label class="form-label">Total Amount</label>
-                        <input type="text" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" name="totalamount">
+                        <input type="text" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" name="totalamount" id="total">
                       </div>
                     </div>
 
                     <div class="col-lg-6 col-md-6">
                       <div class="input-group input-group-outline mb-3">
                         <label class="form-label">Paid Amount</label>
-                        <input type="text" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" name="paidamount">
+                        <input type="text" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" name="paidamount" id="paid">
                       </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                       <div class="input-group input-group-outline mb-3">
                         <label class="form-label">Due Amount</label>
-                        <input type="text" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" name="dueamount">
+                        <input type="text" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" name="dueamount" id="due">
                       </div>
                     </div>
 
