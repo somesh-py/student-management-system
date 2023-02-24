@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  /*********** General CSS ***********/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #2e3c49;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 322;
+  color: darkgray;
+}
+
+/*********** Form CSS ***********/
+#centered {
+  max-width: 300px;
+  margin: 50px auto 0;
+}
+
+h2 {
+  font-family: 'Qwigley', cursive;
+  font-size: 7em;
+  color: #f3f4f6;
+  text-shadow: 1px 3px black;
+}
+
+input, textarea {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  width: 100%;
+  margin: 8px 0;
+  text-indent: 1em;
+  padding: 10px 0;
+  border-radius: 3px;
+  border: 1px solid lightgray;
+}
+
+input[type="submit"] {
+  background-color: #4d90fe;
+  color: white;
+  border: 1px solid #3079ed;
+}
+
+input[type="submit"]:hover {
+  background-color: #4d9aff;
+  color: white;
+}
+
+p {
+  margin-top: 10px;
+  font-size: 0.75em;
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+a {
+  color:inherit;
+}
+
+a:hover {
+  color: #4d9aff;
+}
+
+i {
+  margin: 5px;
+}
+
+
+
+
+</style>
+<body>
+  <head>
+    <meta charset="utf-8">
+    <title>Beautiful Form</title>
+    <link rel="stylesheet" href="main.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Qwigley' rel='stylesheet' type='text/css'>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  </head>
+  <body>
+    
+    <div id="centered">
+      <form action="/teacherupdatedata/" method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Enter Name"><br>
+        <input type="text" name="employeeid" placeholder="Enter employee id"><br>
+        <input type="date" name="joiningdate" placeholder="Enter joining-date"><br>
+        <input type="text" name="experiance" placeholder="Enter experiance.."><br>
+        <select name="course">
+        <option>Course</option>
+        {% if sdata %}
+        {% for i in sdata %}
+        <option value="{{i.id}}" >{{i.course}}</option>
+        {% endfor %}
+        {% endif %}
+        </select>
+        <input type="email" name="email" placeholder="Enter email"><br>
+        <input type="text" name="contact" placeholder="Enter contact"><br>
+        <input type="submit" value="Send" id="send"><br>
+        <input type="hidden" value="{{uid.id}}" name="uid"/>
+      </form>
+      <footer>
+        <a href="https://twitter.com/lopezamuelt"><i class="fa fa-twitter"></i></a>
+        <a href="mailto:samuel@gmail.com"><i class="fa fa-envelope"></i></a>
+      </footer>
+     </div>
+     
+     
+    
+  </body>
+  
+</body>
+</html>

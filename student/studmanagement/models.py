@@ -26,3 +26,22 @@ class Addstudent(models.Model):
     due_amount=models.IntegerField()
     scourse=models.ForeignKey(Addcourse, on_delete=models.CASCADE)
     
+GENDER_CHOICES=(
+    ('m','male'),
+    ('f','female'),
+)
+
+class Addteachers(models.Model):
+    tname=models.CharField(max_length=50)
+    employee_id=models.IntegerField()
+    joining_date=models.DateField()
+    experiance=models.CharField(max_length=50)
+    temail=models.EmailField(max_length=254)
+    tcontact=models.IntegerField(max_length=20)
+    tpassword=models.CharField(max_length=50)
+    tcourses=models.ForeignKey(Addcourse,on_delete=models.CASCADE)
+    tgender=models.CharField(choices=GENDER_CHOICES, max_length=50)
+    tupload_image=models.ImageField(upload_to='teacher/')
+    is_active=models.BooleanField(default=True)
+    update_at=models.DateTimeField(auto_now_add=True)
+    created_at=models.DateField(auto_now_add=True)

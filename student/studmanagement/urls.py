@@ -19,8 +19,18 @@ urlpatterns = [
     path('sign-up/', views.sign_up),
     path('signup_data/', views.signup_updata),
     path('tables/', views.tables),
-    path('tenants/', views.tenants),
+    # students related start
     path('viewstudents/', views.viewstudents),
-    # path('updateform2/',views.updateform2),
+    path('sanjeev/<int:uid>',views.studentformid),
+    path('studentupdatedata/',views.studentupdate),
+    path('deletestudent/<int:uid>',views.deletestudent),
     path('addstudent/',views.addstudent),
+    # student related end
+    path('teachers/',views.teachers),
+    path('addteacher/',views.tecaherdata),
+    path('teacherupdate/<int:uid>/',views.teacherupdate),
+    path('teacherupdatedata/',views.teacherupdatedata),
+    path('deleteteacherdata/<int:uid>',views.deleteteacherdata),
+# 155514519
+# 0205
 ]
