@@ -37,11 +37,11 @@
 }
 #bg
 {
-  background-color:#1C1C1C;
+  background-image:url({% static 'img/ssky.jpg' %});
 }
 </style>
 
-<body class="" id="bg">
+<body class="" id="bg" >
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
       <div class="col-12">
@@ -103,7 +103,7 @@
           <div class="row">
             <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
               <!-- <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center" style="background-image: url({% static 'img/illustrations/illustration-signup.jpg' %}); background-size: cover;"> -->
-                <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center" style="background-image: url({% static 'img/WP.jpg' %}); background-size: cover;">
+              <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center" style="background-image: url({% static 'img/wgp.jpg' %}); background-size: cover;">
               </div>
             </div>
             {% if messages %}
@@ -111,8 +111,8 @@
             <h5 id="h1" >{{i}}</h5>
             {% endfor %}
             {% endif %}
-            <div id="signup"  class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
-              <div class="card card-plain">
+            <div id="signup" class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+              <div class="card card-plain" >
                 <div class="card-header">
                   <h4 class="font-weight-bolder">Sign Up</h4>
                   <p class="mb-0">Enter your email and password to register</p>

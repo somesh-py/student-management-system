@@ -27,8 +27,8 @@ class Addstudent(models.Model):
     scourse=models.ForeignKey(Addcourse, on_delete=models.CASCADE)
     
 GENDER_CHOICES=(
-    ('m','male'),
-    ('f','female'),
+    ('male','male'),
+    ('female','female'),
 )
 
 class Addteachers(models.Model):
@@ -45,3 +45,8 @@ class Addteachers(models.Model):
     is_active=models.BooleanField(default=True)
     update_at=models.DateTimeField(auto_now_add=True)
     created_at=models.DateField(auto_now_add=True)
+
+
+    def __str__(self):
+        return self.tcourses
+    

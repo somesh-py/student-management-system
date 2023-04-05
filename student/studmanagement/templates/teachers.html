@@ -216,6 +216,12 @@
                       </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gender
                       </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">image
+                      </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Edit
+                      </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Delete
+                      </th>
                       </tr>
                   </thead>
                   <tbody>
@@ -230,6 +236,7 @@
                       <td class="align-middle text-sm">{{i.tcontact}}</td>
                       <td class="align-middle text-sm">{{i.tcourses.course}}</td>
                       <td class="align-middle text-sm">{{i.tgender}}</td>
+                      <td><img src="{{ i.tupload_image.url }}" alt="img" width="80px" height="100px"></td>
                       <td><button style="width:80px;border-radius:50px;background-color: deeppink;border:0px;color: aliceblue;"><a href="/teacherupdate/{{i.id}}">Edit</a></button></td>
                       <td><button style="width:80px;border-radius:50px;background-color:orangered;border:0px;color: aliceblue;"><a href="/deleteteacherdata/{{i.id}}">Delete</a></button></td>>
                     </tr>
@@ -327,12 +334,12 @@
                             <div class="dot"></div>
                              <span id="gm" >Male</span>
                              </label>
-                             <input type="radio" name="gender" id="option-1" id="btnq" checked value="m">
+                             <input type="radio" name="gender" id="option-1" id="btnq" checked value="male">
                           <label for="option-2" class="option option-2">
                             <div class="dot"></div>
                              <span id="gm" >Female</span>
                           </label>
-                        <input type="radio" name="gender" id="option-2" id="btnq" value="f" >
+                        <input type="radio" name="gender" id="option-2" id="btnq" value="fe" >
                        </div>
 
                         {% comment %}<label class="form-label">Image</label> {% endcomment %}

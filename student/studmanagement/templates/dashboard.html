@@ -1,7 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,7 +22,12 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{% static 'css/material-dashboard.css' %}" rel="stylesheet" />
 </head>
-
+<style>
+#tbl
+{
+margin-left:50px;
+}
+</style>
 <body class="g-sidenav-show  bg-gray-200">
   <aside
     class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
@@ -40,7 +44,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="/dashboard.html">
+          <a class="nav-link text-white active bg-gradient-primary" href="/dashboard/">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -49,15 +53,15 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link text-white " href="viewstudents.html">
+          <a class="nav-link text-white " href="/viewstudents/">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
-            <span class="nav-link-text ms-1">All Students</span>
+            <span class="nav-link-text ms-1">View Students</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="/courses.html">
+          <a class="nav-link text-white " href="/courses/">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">view_in_ar</i>
             </div>
@@ -82,7 +86,7 @@
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
       <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-4 w-100" href="" type="button">Logout</a>
+        <a class="btn bg-gradient-primary mt-4 w-100" href="/" type="button">Logout</a>
       </div>
     </div>
   </aside>
@@ -135,7 +139,9 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Total Students</p>
-                <h4 class="mb-0">5</h4>
+                {% if bytes %}
+                <h4 class="mb-0">{{bytes}}</h4>
+                {% endif %}
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -153,7 +159,9 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Total Courses</p>
-                <h4 class="mb-0">10</h4>
+                {% if ccount %}
+                <h4 class="mb-0">{{ccount}}</h4>
+                {% endif %}
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -170,8 +178,10 @@
                 <i class="material-icons opacity-10">person</i>
               </div>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Front-End Courses</p>
-                <h4 class="mb-0">5</h4>
+                <p class="text-sm mb-0 text-capitalize">Total Teachers</p>
+                {% if tcount %}
+                <h4 class="mb-0">{{tcount}}</h4>
+                {% endif %}
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -181,24 +191,7 @@
           </div>
         </div>
         <div class="col-xl-3 col-sm-6">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div
-                class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">weekend</i>
-              </div>
-              <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Back-End Courses</p>
-                <h4 class="mb-0">5</h4>
-              </div>
-            </div>
-            <hr class="dark horizontal my-0">
-            <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-success text-sm font-weight-bolder"></p>
-            </div>
-          </div>
         </div>
-      </div>
 
       <div class="row mt-4 mb-4">
         <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
@@ -228,118 +221,16 @@
                     </tr>
                   </thead>
                   <tbody>
+                    {% if course %}
+                    {% for i in course %}
                     <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="{% static 'img/small-logos/logo-xd.svg' %}" class="avatar avatar-sm me-3" alt="xd">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Node js</h6>
-
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle text-sm">
-                        <span class="text-xs font-weight-bold"> Rs.5000 </span>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">3 Months </span>
-                      </td>
-                      <!-- <td class="text-center text-sm">
-                        <span class="text-xs font-weight-bold"> 22 DEC 7:20 PM </span>
-                      </td> -->
+                      <i class="fa fa-envira" aria-hidden="true"></i>
+                      <td id="tbl">{{i.course}}</td>
+                      <td id="tbl">{{i.fees}}</td>
+                      <td id="tbl">{{i.date}}</td>
                     </tr>
-
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="{% static 'img/small-logos/logo-xd.svg' %}" class="avatar avatar-sm me-3" alt="xd">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">React</h6>
-
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle text-sm">
-                        <span class="text-xs font-weight-bold"> Rs.5000 </span>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold"> Satkar 1 </span>
-                      </td>
-                      <!-- <td class="text-center text-sm">
-                        <span class="text-xs font-weight-bold"> 22 DEC 7:20 PM </span>
-                      </td> -->
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="{% static 'img/small-logos/logo-xd.svg' %}" class="avatar avatar-sm me-3" alt="xd">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Python</h6>
-
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle text-sm">
-                        <span class="text-xs font-weight-bold"> Rs.5000 </span>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold"> Satkar 1 </span>
-                      </td>
-                      <!-- <td class="text-center text-sm">
-                        <span class="text-xs font-weight-bold"> 22 DEC 7:20 PM </span>
-                      </td> -->
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="{% static 'img/small-logos/logo-xd.svg' %}" class="avatar avatar-sm me-3" alt="xd">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Angular</h6>
-
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle text-sm">
-                        <span class="text-xs font-weight-bold"> Rs.5000 </span>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold"> Satkar 1 </span>
-                      </td>
-                      <!-- <td class="text-center text-sm">
-                        <span class="text-xs font-weight-bold"> 22 DEC 7:20 PM </span>
-                      </td> -->
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="{% static 'img/small-logos/logo-xd.svg' %}" class="avatar avatar-sm me-3" alt="xd">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Java</h6>
-
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle text-sm">
-                        <span class="text-xs font-weight-bold"> Rs.5000 </span>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold"> Satkar 1 </span>
-                      </td>
-                      <!-- <td class="text-center text-sm">
-                        <span class="text-xs font-weight-bold"> 22 DEC 7:20 PM </span>
-                      </td> -->
-                    </tr>
-
+                    {% endfor %}
+                    {% endif %}
                   </tbody>
                 </table>
               </div>

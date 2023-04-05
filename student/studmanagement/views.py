@@ -45,7 +45,7 @@ def signup_updata(request):
         else:
             Student.objects.create(name=name, email=email, password=password)
             messages.success(request, 'registration done sucessfully')
-            return redirect('/sign-up/')
+            return redirect('/')
 
 
 # registration department end
@@ -53,7 +53,11 @@ def signup_updata(request):
 
 
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    count=Addstudent.objects.all().count()
+    ccount=Addcourse.objects.all().count()
+    tcount=Addteachers.objects.all().count()
+    course=Addcourse.objects.all()
+    return render(request, 'dashboard.html',{'bytes':count,'ccount':ccount,'tcount':tcount,'course':course})
 
 
 def employees(request):
@@ -150,7 +154,7 @@ def addstudent(request):
         else:
             Addstudent.objects.create(sname=name, semail=email, smobile=mobile, saddress=address, scollege=college,
                                       sdegree=degree, scourse=stu_course, total_amount=total_amount, paid_amount=paid_amount, due_amount=due_amount)
-        return redirect('/viewstudents/')
+            return redirect('/viewstudents/')
 
 
 def studentformid(request, uid):
@@ -202,7 +206,7 @@ def tecaherdata(request):
         email = request.POST.get('email')
         contact = request.POST.get('contact')
         gender = request.POST.get('gender')
-        timage = request.POST.get('image')
+        timage = request.FILES.get('image')
         password = make_password(request.POST.get('password'))
         stu_course = Addcourse.objects.get(id=t_course)
         Addteachers.objects.create(tname=name, employee_id=employeeid, joining_date=joiningdate, experiance=experiance,
